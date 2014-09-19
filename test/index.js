@@ -1,11 +1,11 @@
 var path = require('path'),
     assert = require('assert'),
-    indexjs = require('../');
+    moder = require('../');
 
-describe('index.js', function() {
-    var case1 = indexjs(__dirname + '/modules/case1');
-    var case2 = indexjs(__dirname + '/modules/case2', {lazy: false});
-    var case3 = indexjs(__dirname + '/modules/case3');
+describe('moder', function() {
+    var case1 = moder(__dirname + '/modules/case1');
+    var case2 = moder(__dirname + '/modules/case2', {lazy: false});
+    var case3 = moder(__dirname + '/modules/case3');
 
     it('should access all modules in directory', function () {
         assert.equal(case1.user, 'user');

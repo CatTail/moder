@@ -1,12 +1,12 @@
 {
-  "name": "index.js",
+  "name": "moder",
   "version": "0.0.3",
   "description": "Module loader",
   "license": "MIT",
   "author": "CatTail",
   "repository": {
     "type": "git",
-    "url": "git://github.com/CatTail/index.js.git"
+    "url": "git://github.com/CatTail/moder.git"
   },
   "dependencies": {},
   "main": "index.js",
@@ -19,9 +19,9 @@
     "index"
   ],
   "bugs": {
-    "url": "https://github.com/CatTail/index.js/issues"
+    "url": "https://github.com/CatTail/moder/issues"
   },
-  "homepage": "https://github.com/CatTail/index.js",
+  "homepage": "https://github.com/CatTail/moder",
   "devDependencies": {
     "mocha": "^1.21.4"
   }

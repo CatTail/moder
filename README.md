@@ -1,12 +1,12 @@
-# index.js
+# moder
 
-[![Build Status](https://travis-ci.org/CatTail/index.js.svg?branch=master)](https://travis-ci.org/CatTail/index.js)
+[![Build Status](https://travis-ci.org/CatTail/moder.svg?branch=master)](https://travis-ci.org/CatTail/moder)
 
 Module loader
 
 ## Installation
 
-    npm install index.js
+    npm install moder
 
 ## Usage
 
@@ -19,7 +19,7 @@ Example directory structure
 
 In index.js
 
-    module.exports = require('index.js')(__dirname);
+    module.exports = require('moder')(__dirname);
 
 Models will automatically loaded
 
