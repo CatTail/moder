@@ -4,7 +4,8 @@ var fs = require('fs'),
 var exports = module.exports = function(dir, options) {
     var modules = {};
     options = merge(options || {}, {
-        lazy: true
+        lazy: true,
+        init: function(mod){ return mod; }
     });
 
     fs.readdirSync(dir).forEach(function(filename) {
@@ -16,11 +17,11 @@ var exports = module.exports = function(dir, options) {
             if (options.lazy) {
                 Object.defineProperty(modules, moduleName, {
                     get: function() {
-                        return require(modulePath);
+                        return options.init(require(modulePath));
                     }
                 });
             } else {
-                modules[moduleName] = require(modulePath);
+                modules[moduleName] = options.init(require(modulePath));
             }
         }
     });
