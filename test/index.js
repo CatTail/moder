@@ -31,9 +31,9 @@ describe('moder', function() {
     });
 
     it('should support initialization', function() {
-        var case4 = moder(__dirname + '/modules/case4', {init: function(mod) {
+        var case4 = moder(__dirname + '/modules/case4', function(mod) {
             return 'anothername';
-        }});
+        });
         assert.equal(case4.mod, 'anothername');
     });
 });
