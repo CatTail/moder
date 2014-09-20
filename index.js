@@ -3,10 +3,15 @@ var fs = require('fs'),
 
 var exports = module.exports = function(dir, options) {
     var modules = {};
-    options = merge(options || {}, {
-        lazy: true,
-        init: function(mod){ return mod; }
-    });
+    options = options || {};
+    if (typeof options === 'function') {
+        options = {init: options};
+    } else {
+        options = merge(options, {
+            lazy: true,
+            init: function(mod){ return mod; }
+        });
+    }
 
     fs.readdirSync(dir).forEach(function(filename) {
         // filter index and dotfiles
