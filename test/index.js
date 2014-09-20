@@ -4,8 +4,6 @@ var path = require('path'),
 
 describe('moder', function() {
     var case1 = moder(__dirname + '/modules/case1');
-    var case2 = moder(__dirname + '/modules/case2', {lazy: false});
-    var case3 = moder(__dirname + '/modules/case3');
 
     it('should access all modules in directory', function () {
         assert.equal(case1.user, 'user');
@@ -21,12 +19,21 @@ describe('moder', function() {
     });
 
     it('should support non lazy module load', function() {
+        var case2 = moder(__dirname + '/modules/case2', {lazy: false});
         assert.equal(!!require.cache[__dirname + '/modules/case2/user.js'], true);
         assert.equal(!!require.cache[__dirname + '/modules/case2/blog.js'], true);
     });
 
     it('should support directory module load', function() {
+        var case3 = moder(__dirname + '/modules/case3');
         assert.equal(case3.app1, 'app1');
         assert.equal(case3.app2, 'app2');
-    })
+    });
+
+    it('should support initialization', function() {
+        var case4 = moder(__dirname + '/modules/case4', {init: function(mod) {
+            return 'anothername';
+        }});
+        assert.equal(case4.mod, 'anothername');
+    });
 });
