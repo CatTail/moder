@@ -4,7 +4,7 @@ var path = require('path'),
 require("babel-register");
 
 describe('moder', function() {
-    this.timeout(5000) // babel compile time
+    this.timeout(10000) // babel compile time
     var case1 = moder(__dirname + '/modules/case1');
 
     it('should access all modules in directory', function () {
