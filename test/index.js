@@ -43,4 +43,9 @@ describe('moder', function() {
         var case5 = moder(__dirname + '/modules/case5');
         assert.deepEqual(case5.hello, { default: 'world' });
     });
+
+    it('should convert module name to camel case', function() {
+        var case6 = moder(__dirname + '/modules/case6');
+        assert.deepEqual(case6.fooBar, 'hello world');
+    });
 });

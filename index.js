@@ -1,5 +1,6 @@
 var fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    camelcase = require('camelcase');
 
 var exports = module.exports = function(dir, options) {
     var modules = {};
@@ -20,7 +21,7 @@ var exports = module.exports = function(dir, options) {
             var modulePath = path.join(dir, moduleName);
             // lazy load
             if (options.lazy) {
-                Object.defineProperty(modules, moduleName, {
+                Object.defineProperty(modules, camelcase(moduleName), {
                     get: function() {
                         return options.init(require(modulePath));
                     }
