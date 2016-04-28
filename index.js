@@ -19,15 +19,16 @@ var exports = module.exports = function(dir, options) {
         if (filename !== 'index.js' && filename[0] !== '.') {
             var moduleName = path.basename(filename, path.extname(filename));
             var modulePath = path.join(dir, moduleName);
+            var exportName = camelcase(moduleName);
             // lazy load
             if (options.lazy) {
-                Object.defineProperty(modules, camelcase(moduleName), {
+                Object.defineProperty(modules, exportName, {
                     get: function() {
                         return options.init(require(modulePath));
                     }
                 });
             } else {
-                modules[moduleName] = options.init(require(modulePath));
+                modules[exportName] = options.init(require(modulePath));
             }
         }
     });
