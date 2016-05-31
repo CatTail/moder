@@ -9,7 +9,8 @@
     "url": "git://github.com/CatTail/moder.git"
   },
   "dependencies": {
-    "camelcase": "^2.1.1"
+    "camelcase": "^2.1.1",
+    "uppercamelcase": "^1.1.0"
   },
   "main": "index.js",
   "scripts": {
