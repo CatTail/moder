@@ -45,12 +45,17 @@ describe('moder', function() {
     });
 
     it('should convert module name to camel case', function() {
-        var case6 = moder(__dirname + '/modules/case6');
+        var case6 = moder(__dirname + '/modules/case6', {naming: 'camel'});
         assert.deepEqual(case6.fooBar, 'hello world');
     });
 
     it('should convert module name to camel case without lazy evaluation', function() {
-        var case7 = moder(__dirname + '/modules/case7', {lazy: false});
+        var case7 = moder(__dirname + '/modules/case7', {lazy: false, naming: 'camel'});
         assert.deepEqual(case7.fooBar, 'hello world');
+    });
+
+    it('should convert module name to pascal case', function() {
+        var case6 = moder(__dirname + '/modules/case7', {naming: 'pascal'});
+        assert.deepEqual(case6.FooBar, 'hello world');
     });
 });
