@@ -30,7 +30,10 @@ function load(dir, options) {
 
     fs.readdirSync(dir).forEach(function(filename) {
         // filter index and dotfiles
-        if (filename !== 'index.js' && filename[0] !== '.') {
+        var stat = fs.statSync(path.join(dir, filename))
+        var isModule = stat.isFile() && path.extname(filename) === '.js' && 
+            filename !== 'index.js' && filename[0] !== '.'
+        if (stat.isDirectory() || isModule) {
             var moduleName = path.basename(filename, path.extname(filename))
             var modulePath = path.join(dir, moduleName)
             var exportName = options.naming(moduleName)
