@@ -64,4 +64,15 @@ describe('moder', function() {
         assert.deepEqual(case9.foo, 'hello world')
         assert.deepEqual(case9.bar, undefined)
     })
+
+    it('should allow custom filter', function() {
+        var case10 = moder(__dirname + '/modules/case10', {
+            lazy: false,
+            filter: function(moduleName) {
+                return moduleName.indexOf('-test') !== -1
+            },
+        })
+        assert.deepEqual(case10.foo, 'hello world')
+        assert.deepEqual(case10['foo-test'], undefined)
+    })
 })
