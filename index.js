@@ -6,8 +6,6 @@ var pascalcase = require('uppercamelcase')
 module.exports = load
 
 function load(dir, options) {
-    var modules = {}
-
     options = options || {}
     if (typeof options === 'function') {
         options = {init: options}
@@ -28,6 +26,7 @@ function load(dir, options) {
         init: identify,
     })
 
+    var modules = options.exports || {}
     fs.readdirSync(dir).forEach(function(filename) {
         // filter index and dotfiles
         var stat = fs.statSync(path.join(dir, filename))
