@@ -69,7 +69,7 @@ describe('moder', function() {
         var case10 = moder(__dirname + '/modules/case10', {
             lazy: false,
             filter: function(moduleName) {
-                return moduleName.indexOf('-test') !== -1
+                return moduleName.indexOf('-test.js') !== -1
             },
         })
         assert.deepEqual(case10.foo, 'hello world')

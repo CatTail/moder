@@ -44,7 +44,7 @@ module.exports = function load(dirname, options) {
         var moduleName = path.basename(filename, path.extname(filename))
         var modulePath = path.join(dirname, moduleName)
         var exportName = options.naming(moduleName)
-        if ((stat.isDirectory() || isModule) && !options.filter(moduleName, modulePath, exportName)) {
+        if ((stat.isDirectory() || isModule) && !options.filter(filename)) {
             // lazy load
             if (options.lazy) {
                 Object.defineProperty(modules, exportName, {
