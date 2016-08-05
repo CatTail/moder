@@ -38,23 +38,39 @@ module.exports = function load(dirname, options) {
 
     var modules = options.exports || {}
     fs.readdirSync(dirname).forEach(function(filename) {
-        // filter index and dotfiles
+        // custom filter
+        if (options.filter(filename)) {
+            return
+        }
+
         var stat = fs.statSync(path.join(dirname, filename))
-        var isModule = stat.isFile() && path.extname(filename) === '.js' && filename !== 'index.js' && filename[0] !== '.'
+        if (stat.isDirectory()) {
+            // filter directory without index.js
+            try {
+                fs.accessSync(path.join(dirname, filename, 'index.js'))
+            } catch (err) {
+                return
+            }
+        } else {
+            // filter not .js or temporary files
+            var isModule = stat.isFile() && path.extname(filename) === '.js' && filename !== 'index.js' && filename[0] !== '.'
+            if (!isModule) {
+                return
+            }
+        }
+
         var moduleName = path.basename(filename, path.extname(filename))
         var modulePath = path.join(dirname, moduleName)
         var exportName = options.naming(moduleName)
-        if ((stat.isDirectory() || isModule) && !options.filter(filename)) {
-            // lazy load
-            if (options.lazy) {
-                Object.defineProperty(modules, exportName, {
-                    get: function() {
-                        return options.init(require(modulePath))
-                    }
-                })
-            } else {
-                modules[exportName] = options.init(require(modulePath))
-            }
+        // lazy load
+        if (options.lazy) {
+            Object.defineProperty(modules, exportName, {
+                get: function() {
+                    return options.init(require(modulePath))
+                }
+            })
+        } else {
+            modules[exportName] = options.init(require(modulePath))
         }
     })
     return modules
