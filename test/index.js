@@ -30,6 +30,7 @@ describe('moder', function() {
         var case3 = moder(__dirname + '/modules/case3')
         assert.equal(case3.app1, 'app1')
         assert.equal(case3.app2, 'app2')
+        assert.equal(case3.app3, undefined)
     })
 
     it('should support initialization', function() {
